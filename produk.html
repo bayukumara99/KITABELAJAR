@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Produk | Kita Belajar</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root { --ink: #1c2824; --muted: #718078; --paper: #f5f3ec; --surface: #fffefa; --line: #dce3da; --green: #2f6552; --lime: #d5ef7d; --orange: #e77745; --yellow: #f3c75c; --serif: Georgia, 'Times New Roman', serif; }
+        * { box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { margin: 0; overflow-x: hidden; background: var(--paper); color: var(--ink); font-family: 'Manrope', sans-serif; }
+        button, input { font: inherit; }
+        button { cursor: pointer; }
+        a { color: inherit; text-decoration: none; }
+        .shell { max-width: 1240px; margin: 0 auto; padding: 0 32px; }
+        .topbar { border-bottom: 1px solid var(--line); }
+        nav { height: 78px; display: flex; align-items: center; justify-content: space-between; gap: 28px; }
+        .brand { display: flex; align-items: center; gap: 10px; font-size: 19px; font-weight: 800; letter-spacing: -.05em; }
+        .brand-mark { display: grid; place-items: center; width: 31px; height: 31px; border-radius: 50%; background: var(--green); color: var(--lime); font-family: var(--serif); font-size: 18px; font-style: italic; }
+        .nav-links, .nav-actions { display: flex; align-items: center; gap: 24px; }
+        .nav-links { color: var(--muted); font-size: 13px; font-weight: 700; }
+        .nav-links a:first-child { color: var(--ink); }
+        .search { display: flex; align-items: center; gap: 8px; border-bottom: 1px solid var(--line); padding: 6px 0; color: var(--muted); font-size: 12px; }
+        .search input { width: 145px; border: 0; outline: 0; background: transparent; color: var(--ink); font-size: 12px; }
+        .cart { display: flex; align-items: center; gap: 8px; border: 0; background: transparent; color: var(--ink); font-size: 13px; font-weight: 800; }
+        .cart-count { display: grid; place-items: center; width: 20px; height: 20px; border-radius: 50%; background: var(--orange); color: white; font-size: 10px; }
+        .eyebrow { display: flex; align-items: center; gap: 9px; color: var(--green); font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; }
+        .eyebrow::before { content: ''; width: 24px; height: 1px; background: var(--green); }
+        .catalog-head { display: flex; align-items: end; justify-content: space-between; gap: 30px; padding: 80px 0 48px; }
+        h1 { max-width: 650px; margin: 18px 0 0; font-size: clamp(48px, 7vw, 82px); line-height: .94; letter-spacing: -.085em; }
+        h1 em { font-family: var(--serif); font-weight: 400; }
+        .catalog-intro { max-width: 290px; margin: 0; color: var(--muted); font-size: 13px; line-height: 1.75; }
+        .toolbar { display: flex; align-items: center; justify-content: space-between; gap: 20px; border-top: 1px solid var(--line); padding: 24px 0 28px; }
+        .filters { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 3px; }
+        .filter { white-space: nowrap; border: 1px solid var(--line); border-radius: 24px; padding: 9px 15px; background: transparent; color: var(--muted); font-size: 12px; }
+        .filter.active, .filter:hover { border-color: var(--green); background: var(--green); color: white; }
+        .result-count { color: var(--muted); font-size: 12px; white-space: nowrap; }
+        .products { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px 15px; padding-bottom: 100px; }
+        .product.hidden { display: none; }
+        .product-visual { height: 255px; display: flex; flex-direction: column; justify-content: space-between; padding: 18px; overflow: hidden; position: relative; }
+        .product-visual::after { content: ''; position: absolute; width: 130px; height: 130px; right: -40px; bottom: -38px; border: 1px solid currentColor; border-radius: 50%; opacity: .28; }
+        .visual-green { background: #bbd5be; color: var(--green); } .visual-yellow { background: var(--yellow); color: #624716; } .visual-blue { background: #bdd7d8; color: #25555a; } .visual-orange { background: #e78a5b; color: #612e20; }
+        .product-type { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: .06em; text-transform: uppercase; }
+        .product-title-art { max-width: 170px; font-size: 30px; line-height: .94; letter-spacing: -.08em; font-weight: 800; }
+        .product-number { align-self: flex-end; font-family: var(--serif); font-size: 44px; font-style: italic; }
+        .product-info { display: flex; justify-content: space-between; gap: 10px; padding-top: 15px; }
+        .product-info h2 { margin: 0 0 5px; font-size: 14px; letter-spacing: -.03em; }
+        .product-info p { margin: 0; color: var(--muted); font-size: 11px; }
+        .price { color: var(--green); font-size: 13px; font-weight: 800; white-space: nowrap; }
+        .add { display: grid; place-items: center; width: 40px; height: 40px; margin-top: 10px; border: 1px solid var(--line); border-radius: 50%; background: var(--surface); color: var(--green); font-size: 20px; transition: .2s; }
+        .add:hover { transform: rotate(90deg); background: var(--green); color: white; }
+        footer { display: flex; justify-content: space-between; border-top: 1px solid var(--line); padding: 24px 0 35px; color: var(--muted); font-size: 11px; }
+        .cart-modal { position: fixed; inset: 0; z-index: 5; display: flex; justify-content: flex-end; background: #1c282466; opacity: 0; pointer-events: none; transition: opacity .25s; }
+        .cart-modal.open { opacity: 1; pointer-events: auto; }
+        .cart-panel { width: min(430px, 100%); height: 100%; overflow: auto; padding: 34px; background: var(--surface); transform: translateX(100%); transition: transform .25s; }
+        .cart-modal.open .cart-panel { transform: translateX(0); }
+        .cart-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 26px; }
+        .cart-head h2 { margin: 0; font-size: 30px; letter-spacing: -.08em; }
+        .close { width: 44px; height: 44px; border: 1px solid var(--line); border-radius: 50%; background: transparent; font-size: 20px; }
+        .cart-item { border-top: 1px solid var(--line); padding: 18px 0; }
+        .cart-item-top, .cart-item-bottom { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+        .cart-item h3 { margin: 0 0 5px; font-size: 14px; } .cart-item p { margin: 0; color: var(--muted); font-size: 11px; }
+        .cart-item-bottom { margin-top: 15px; } .quantity { display: flex; align-items: center; border: 1px solid var(--line); } .quantity button { width: 30px; height: 30px; border: 0; background: transparent; color: var(--green); } .quantity span { min-width: 25px; text-align: center; font-size: 12px; }
+        .remove { border: 0; background: transparent; color: var(--muted); font-size: 11px; text-decoration: underline; }
+        .cart-total { display: flex; justify-content: space-between; border-top: 1px solid var(--ink); margin-top: 18px; padding-top: 18px; font-size: 14px; font-weight: 800; }
+        .empty { padding: 35px 0; color: var(--muted); font-size: 13px; line-height: 1.7; }
+        @media (max-width: 850px) { .nav-links { display: none; } .catalog-head { align-items: start; flex-direction: column; padding-top: 58px; } .products { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 520px) { .shell { padding-inline: 20px; } nav { height: 68px; } .search { display: none; } .toolbar { align-items: start; flex-direction: column; } .product-visual { height: 200px; } .product-title-art { font-size: 23px; } .filter { min-height: 44px; } footer { flex-direction: column; gap: 8px; } .cart-panel { padding: 25px 20px; } }
+    </style>
+</head>
+<body>
+    <header class="topbar"><div class="shell"><nav><a class="brand" href="index.html#top"><span class="brand-mark">k</span>Kita Belajar</a><div class="nav-links"><a href="produk.html">Produk</a><a href="index.html#cerita">Cerita Kami</a><a href="index.html#bantuan">Bantuan</a></div><div class="nav-actions"><label class="search">⌕ <input id="searchInput" type="search" placeholder="Cari produk..." aria-label="Cari produk"></label><button class="cart" id="openCart" type="button">Keranjang <span class="cart-count" id="cartCount">0</span></button></div></nav></div></header>
+    <main>
+        <section class="shell catalog-head"><div><div class="eyebrow">The collection</div><h1>Tools kecil untuk <em>langkah</em> besar.</h1></div><p class="catalog-intro">Template, panduan, dan bundle digital yang bisa kamu pakai berulang kali untuk belajar, bekerja, dan bertumbuh dengan caramu sendiri.</p></section>
+        <section class="shell"><div class="toolbar"><div class="filters" role="group" aria-label="Filter produk"><button class="filter active" data-filter="all">Semua produk</button><button class="filter" data-filter="template">Template</button><button class="filter" data-filter="guide">Panduan</button><button class="filter" data-filter="bundle">Bundle</button></div><span class="result-count" id="resultCount"></span></div><div class="products" id="productGrid"></div></section>
+    </main>
+    <footer class="shell"><span>© 2024 Kita Belajar. Dibuat dengan niat baik.</span><span><a href="index.html#bantuan">Butuh bantuan?</a> &nbsp; · &nbsp; hello@kitabelajar.co</span></footer>
+    <div class="cart-modal" id="cartModal" role="dialog" aria-modal="true" aria-labelledby="cartTitle"><aside class="cart-panel"><div class="cart-head"><h2 id="cartTitle">Keranjangmu</h2><button class="close" id="closeCart" type="button" aria-label="Tutup keranjang">×</button></div><div id="cartItems"></div><div class="cart-total"><span>Total</span><span id="cartTotal">Rp0</span></div></aside></div>
+    <script>
+        const products = [
+            ['tiny-habits', 'Tiny Habit Tracker', 'Tiny\nhabit\ntracker', 'Guide / Habit', 'Konsisten lewat langkah kecil.', 35000, 'guide', 'visual-green'],
+            ['calm-morning', 'Calm Morning Kit', 'Calm\nmorning\nkit', 'Template / Notion', 'Mulai hari tanpa terburu-buru.', 39000, 'template', 'visual-yellow'],
+            ['study-notes', 'Study Notes Pack', 'Study\nnotes\npack', 'Template / Study', 'Catatan rapi untuk belajar aktif.', 45000, 'template', 'visual-blue'],
+            ['weekly-reset', 'Weekly Reset Planner', 'Weekly\nreset\nplanner', 'Template / Notion', 'Ritual mingguan yang lebih tenang.', 49000, 'template', 'visual-green'],
+            ['daily-journal', 'Daily Reflection Journal', 'Daily\nreflection\njournal', 'Guide / Reflection', 'Menutup hari dengan lebih sadar.', 55000, 'guide', 'visual-orange'],
+            ['simple-money-map', 'Simple Money Map', 'Simple\nmoney\nmap', 'Spreadsheet / Finance', 'Uangmu, lebih mudah dipahami.', 59000, 'template', 'visual-blue'],
+            ['content-sprint', 'Content Sprint Kit', 'Content\nsprint\nkit', 'Guide / Creator', 'Ide jadi karya dalam 7 hari.', 69000, 'guide', 'visual-orange'],
+            ['focus-without-force', 'Focus Without Force', 'Focus\nwithout\nforce', 'E-book / 42 pages', 'Memahami energi, bukan melawannya.', 79000, 'guide', 'visual-yellow'],
+            ['freelance-starter', 'Freelance Starter Kit', 'Freelance\nstarter\nkit', 'Template / Freelance', 'Kerja mandiri lebih terarah.', 89000, 'template', 'visual-green'],
+            ['deep-work-system', 'Deep Work System', 'Deep\nwork\nsystem', 'Template / Productivity', 'Fokus panjang tanpa drama.', 99000, 'template', 'visual-blue'],
+            ['mindful-money', 'Mindful Money Bundle', 'Mindful\nmoney\nbundle', 'Bundle / Finance', 'Keuangan dan kebiasaan dalam satu ruang.', 119000, 'bundle', 'visual-yellow'],
+            ['gentle-bundle', 'The Gentle Bundle', 'The\ngentle\nbundle', 'Bundle / 3 products', 'Tiga tools untuk mulai lagi.', 129000, 'bundle', 'visual-orange'],
+            ['learn-better', 'Learn Better Bundle', 'Learn\nbetter\nbundle', 'Bundle / Learning', 'Sistem belajar dari awal sampai review.', 139000, 'bundle', 'visual-blue'],
+            ['creator-launch', 'Creator Launch Bundle', 'Creator\nlaunch\nbundle', 'Bundle / Creator', 'Mulai proyek kreatifmu.', 149000, 'bundle', 'visual-green'],
+            ['yearly-vault', 'Yearly Growth Vault', 'Yearly\ngrowth\nvault', 'Bundle / Annual', 'Ruang lengkap untuk satu tahun bertumbuh.', 179000, 'bundle', 'visual-orange']
+        ];
+        let cart = JSON.parse(localStorage.getItem('kitaBelajarCart') || '{}');
+        const money = value => `Rp${value.toLocaleString('id-ID')}`;
+        const grid = document.querySelector('#productGrid');
+        function renderProducts() {
+            const filter = document.querySelector('.filter.active').dataset.filter;
+            const query = document.querySelector('#searchInput').value.toLowerCase().trim();
+            const visible = products.filter(product => (filter === 'all' || product[6] === filter) && `${product[1]} ${product[3]} ${product[4]}`.toLowerCase().includes(query));
+            document.querySelector('#resultCount').textContent = `${visible.length} produk`;
+            grid.innerHTML = visible.map(([id, title, art, type, description, price, category, color], index) => `<article class="product"><div class="product-visual ${color}"><span class="product-type">${type}</span><strong class="product-title-art">${art.replaceAll('\n', '<br>')}</strong><span class="product-number">${String(index + 1).padStart(2, '0')}</span></div><div class="product-info"><div><h2>${title}</h2><p>${description}</p></div><div><div class="price">${money(price)}</div><button class="add" type="button" data-product-id="${id}" aria-label="Tambah ${title}">+</button></div></div></article>`).join('') || '<p class="empty">Produk yang kamu cari belum ditemukan.</p>';
+            grid.querySelectorAll('.add').forEach(button => button.addEventListener('click', () => { cart[button.dataset.productId] = (cart[button.dataset.productId] || 0) + 1; renderCart(); button.textContent = '✓'; setTimeout(() => button.textContent = '+', 700); }));
+        }
+        function renderCart() {
+            localStorage.setItem('kitaBelajarCart', JSON.stringify(cart));
+            const entries = Object.entries(cart).filter(([id]) => products.some(product => product[0] === id));
+            document.querySelector('#cartCount').textContent = entries.reduce((sum, [, quantity]) => sum + quantity, 0);
+            document.querySelector('#cartTotal').textContent = money(entries.reduce((sum, [id, quantity]) => sum + products.find(product => product[0] === id)[5] * quantity, 0));
+            document.querySelector('#cartItems').innerHTML = entries.length ? entries.map(([id, quantity]) => { const product = products.find(item => item[0] === id); return `<div class="cart-item"><div class="cart-item-top"><div><h3>${product[1]}</h3><p>${money(product[5])}</p></div><button class="remove" data-remove="${id}" type="button">Hapus</button></div><div class="cart-item-bottom"><div class="quantity"><button data-decrease="${id}" type="button">−</button><span>${quantity}</span><button data-increase="${id}" type="button">+</button></div><strong class="price">${money(product[5] * quantity)}</strong></div></div>`; }).join('') : '<p class="empty">Keranjang masih kosong. Pilih produk yang ingin kamu bawa pulang.</p>';
+        }
+        document.querySelectorAll('.filter').forEach(button => button.addEventListener('click', () => { document.querySelectorAll('.filter').forEach(item => item.classList.remove('active')); button.classList.add('active'); renderProducts(); }));
+        document.querySelector('#searchInput').addEventListener('input', renderProducts);
+        document.querySelector('#cartItems').addEventListener('click', event => { const target = event.target; const id = target.dataset.remove || target.dataset.decrease || target.dataset.increase; if (!id) return; if (target.dataset.remove) delete cart[id]; if (target.dataset.decrease) { cart[id] -= 1; if (cart[id] <= 0) delete cart[id]; } if (target.dataset.increase) cart[id] += 1; renderCart(); });
+        document.querySelector('#openCart').addEventListener('click', () => { document.querySelector('#cartModal').classList.add('open'); document.querySelector('#closeCart').focus(); });
+        document.querySelector('#closeCart').addEventListener('click', () => document.querySelector('#cartModal').classList.remove('open'));
+        document.querySelector('#cartModal').addEventListener('click', event => { if (event.target.id === 'cartModal') document.querySelector('#closeCart').click(); });
+        document.addEventListener('keydown', event => { if (event.key === 'Escape') document.querySelector('#cartModal').classList.remove('open'); });
+        renderProducts(); renderCart();
+    </script>
+</body>
+</html>
