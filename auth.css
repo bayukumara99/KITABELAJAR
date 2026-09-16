@@ -41,3 +41,4 @@
 .forgot-status.error { color: #b4492c; }
 .forgot-status.success { color: var(--green); }
 @media (max-width: 520px) { .account-modal, .forgot-panel { padding: 12px; } .account-form { padding: 36px 24px 28px; } .dashboard-head { padding: 30px 24px; } .dashboard-body { padding: 30px 24px; } .forgot-card { padding: 36px 24px 28px; } }
+.nav-actions a:first-child::before { content: var(--account-initial, '?'); }
