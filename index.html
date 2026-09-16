@@ -728,6 +728,10 @@
             updateAccountButton(null);
             closeAccount();
         });
+        window.addEventListener('storage', event => {
+            if (event.key !== 'kitaBelajarAccount') return;
+            updateAccountButton(getSavedAccount());
+        });
         updateAccountButton(getSavedAccount());
         renderCart();
     </script>
