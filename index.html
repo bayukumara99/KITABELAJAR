@@ -208,6 +208,15 @@
         .access-item { display: flex; align-items: center; justify-content: space-between; gap: 12px; border-block: 1px solid var(--line); padding: 15px 0; font-size: 13px; }
         .access-item span { color: var(--muted); font-size: 11px; }
         .logout { width: 100%; margin-top: 28px; border: 1px solid var(--green); border-radius: 40px; padding: 12px; background: transparent; color: var(--green); font-size: 12px; font-weight: 700; }
+        .flash-sale { margin: 0 0 96px; padding: 52px 0; background: var(--orange); }
+        .flash-sale-grid { display: grid; grid-template-columns: 1fr .8fr; align-items: end; gap: 70px; }
+        .flash-sale-title { max-width: 650px; margin: 18px 0 14px; font-size: clamp(38px, 6vw, 72px); line-height: .94; letter-spacing: -.08em; }
+        .flash-sale-title em { font-family: var(--serif); font-weight: 400; }
+        .flash-sale-copy { max-width: 470px; margin: 0; color: #612e20; font-size: 14px; line-height: 1.75; }
+        .flash-sale-offer { border-top: 1px solid #612e20; padding-top: 18px; color: #612e20; }
+        .flash-sale-offer strong { display: block; margin-bottom: 8px; color: var(--ink); font-size: 22px; letter-spacing: -.05em; }
+        .flash-sale-offer span { display: block; margin-bottom: 22px; font: 11px 'DM Mono', monospace; text-transform: uppercase; }
+        .flash-sale-link { display: inline-block; border-bottom: 1px solid var(--ink); padding-bottom: 4px; color: var(--ink); font-size: 12px; font-weight: 800; }
         .story { border-top: 1px solid var(--line); padding: 88px 0 96px; }
         .story-grid { display: grid; grid-template-columns: .75fr 1.25fr; gap: 80px; align-items: start; }
         .story-title { margin: 18px 0 0; max-width: 320px; font-size: clamp(34px, 5vw, 58px); line-height: .98; letter-spacing: -.08em; }
@@ -237,12 +246,13 @@
         .faq-answer { display: none; max-width: 570px; padding: 0 35px 20px 0; color: var(--muted); font-size: 12px; line-height: 1.75; }
         .faq-item.open .faq-answer { display: block; }
         .faq-item.open .faq-icon { transform: rotate(45deg); }
-        .marquee { border-block: 1px solid var(--line); padding: 17px 0; overflow: hidden; color: var(--green); font-family: 'DM Mono', monospace; font-size: 11px; text-transform: uppercase; white-space: nowrap; }
+        .marquee { border-block: 1px solid var(--line); padding: 17px 8%; overflow: hidden; color: var(--green); font-family: 'DM Mono', monospace; font-size: 11px; text-align: center; text-transform: uppercase; white-space: nowrap; }
         .marquee span { margin-right: 42px; }
         footer { padding: 24px 0 35px; display: flex; justify-content: space-between; color: var(--muted); font-size: 11px; }
-        @media (max-width: 850px) { nav { height: auto; flex-wrap: wrap; gap: 18px 28px; padding: 16px 0; } .nav-links { order: 3; flex: 0 0 100%; overflow-x: auto; justify-content: flex-start; gap: 24px; padding-bottom: 4px; scrollbar-width: none; } .nav-links::-webkit-scrollbar { display: none; } .hero { grid-template-columns: 1fr; gap: 20px; padding: 58px 0 40px; } .hero-art { max-width: 480px; width: 100%; margin: 0 auto; } .products { grid-template-columns: repeat(2, 1fr); } .story-grid, .help-grid { grid-template-columns: 1fr; gap: 35px; } }
-        @media (max-width: 520px) { .shell { padding-inline: 20px; } .topbar { padding-top: env(safe-area-inset-top); } nav { padding: 12px 0; } h1 { font-size: 55px; } .hero-art { transform: scale(.82); transform-origin: top center; height: 330px; margin-bottom: -30px; } .shop-head { align-items: start; flex-direction: column; gap: 7px; } .product-visual { height: 200px; } .product-title-art { font-size: 23px; } .filter { min-height: 44px; } .detail-link, .back-detail { min-height: 44px; padding-top: 12px; } .field input, .account-field input { font-size: 16px; } .method { min-height: 44px; } footer { flex-direction: column; gap: 8px; padding-bottom: calc(35px + env(safe-area-inset-bottom)); } .story, .help { padding: 60px 0; } .story-facts { grid-template-columns: 1fr; margin-top: 30px; } .help-head { align-items: start; flex-direction: column; gap: 15px; } .detail-modal, .payment-modal, .account-modal { padding: 12px; } .detail-panel, .payment-panel { display: block; max-height: 94vh; } .account-form, .dashboard-body { padding: 30px 24px; } .dashboard-head { padding: 30px 24px; } .detail-art { min-height: 230px; padding: 22px; } .detail-art .product-title-art { font-size: 34px; } .detail-art .product-number { font-size: 48px; } .detail-content, .payment-form { padding: 30px 24px 28px; } .page-previews { gap: 5px; } .preview-page { min-height: 112px; padding: 8px; } .preview-page strong { margin: 14px 0 9px; font-size: 10px; } .payment-summary { min-height: 220px; padding: 25px 24px; } .payment-summary h2 { margin: 12px 0; font-size: 34px; } }
+        @media (max-width: 850px) { nav { height: auto; flex-wrap: wrap; gap: 18px 28px; padding: 16px 0; } .nav-links { order: 3; flex: 0 0 100%; overflow-x: auto; justify-content: flex-start; gap: 24px; padding-bottom: 4px; scrollbar-width: none; } .nav-links::-webkit-scrollbar { display: none; } .hero { grid-template-columns: 1fr; gap: 20px; padding: 58px 0 40px; } .hero-art { max-width: 480px; width: 100%; margin: 0 auto; } .products { grid-template-columns: repeat(2, 1fr); } .flash-sale-grid, .story-grid, .help-grid { grid-template-columns: 1fr; gap: 35px; } }
+        @media (max-width: 520px) { .shell { padding-inline: 20px; } .topbar { padding-top: env(safe-area-inset-top); } nav { padding: 12px 0; } h1 { font-size: 55px; } .hero-art { transform: scale(.82); transform-origin: top center; height: 330px; margin-bottom: -30px; } .shop-head { align-items: start; flex-direction: column; gap: 7px; } .product-visual { height: 200px; } .product-title-art { font-size: 23px; } .filter { min-height: 44px; } .detail-link, .back-detail { min-height: 44px; padding-top: 12px; } .field input, .account-field input { font-size: 16px; } .method { min-height: 44px; } footer { flex-direction: column; gap: 8px; padding-bottom: calc(35px + env(safe-area-inset-bottom)); } .flash-sale { margin-bottom: 60px; padding: 60px 0; } .story, .help { padding: 60px 0; } .story-facts { grid-template-columns: 1fr; margin-top: 30px; } .help-head { align-items: start; flex-direction: column; gap: 15px; } .detail-modal, .payment-modal, .account-modal { padding: 12px; } .detail-panel, .payment-panel { display: block; max-height: 94vh; } .account-form, .dashboard-body { padding: 30px 24px; } .dashboard-head { padding: 30px 24px; } .detail-art { min-height: 230px; padding: 22px; } .detail-art .product-title-art { font-size: 34px; } .detail-art .product-number { font-size: 48px; } .detail-content, .payment-form { padding: 30px 24px 28px; } .page-previews { gap: 5px; } .preview-page { min-height: 112px; padding: 8px; } .preview-page strong { margin: 14px 0 9px; font-size: 10px; } .payment-summary { min-height: 220px; padding: 25px 24px; } .payment-summary h2 { margin: 12px 0; font-size: 34px; } }
         @media (max-width: 520px) { .forgot-panel { padding: 12px; } .forgot-card { padding: 36px 24px 28px; } }
+        .nav-actions .cart, .cart-modal { display:none; }
     </style>
 </head>
 <body>
@@ -250,7 +260,7 @@
         <div class="shell">
             <nav>
                 <a class="brand" href="index.html#top"><span class="brand-mark">k</span>Kita Belajar</a>
-                <div class="nav-links"><a href="#top">Beranda</a><a href="#produk">Artikel</a><a href="#cerita">Keunggulan</a><a href="#produk">Promo</a><a href="#cerita">Testimoni</a><a href="#bantuan">Bantuan</a></div>
+                <div class="nav-links"><a href="index.html">Beranda</a><a href="produk.html">Produk</a><a href="keunggulan.html">Keunggulan</a><a href="promo.html">Promo</a><a href="testimoni.html">Testimoni</a><a href="bantuan.html">Bantuan</a></div>
                 <div class="nav-actions"><button class="account-button" id="accountButton" aria-label="Buka akun"><span class="account-avatar" id="accountAvatar">?</span><span id="accountLabel">Masuk</span></button><button class="cart" aria-label="Lihat keranjang">Keranjang <span class="cart-count" id="cartCount">0</span></button></div>
             </nav>
         </div>
@@ -271,7 +281,7 @@
                 <div class="eyebrow">Digital goods, thoughtfully made</div>
                 <h1>Ruang untuk<br><em>tumbuh</em> setiap hari.</h1>
                 <p class="hero-copy">Template, panduan, dan tools kecil yang membantu kamu belajar lebih fokus, bekerja lebih rapi, dan menjalani hari dengan lebih ringan.</p>
-                <div class="hero-cta"><a class="primary" href="produk.html">Jelajahi produk</a><a class="text-link" href="#cerita">Kenapa Kita Belajar?</a></div>
+                <div class="hero-cta"><a class="primary" href="produk.html">Jelajahi produk</a><a class="text-link" href="promo.html">Lihat promo terbaru</a></div>
             </div>
             <div class="hero-art" aria-label="Kolase produk digital Kita Belajar">
                 <div class="art-card art-back"></div>
@@ -303,29 +313,10 @@
                 <article class="product" data-category="bundle" data-name="yearly growth vault" data-product-id="yearly-vault"><div class="product-visual visual-orange"><span class="product-type">Bundle / Annual</span><strong class="product-title-art">Yearly<br>growth<br>vault</strong><span class="product-number">15</span></div><div class="product-info"><div><h3>Yearly Growth Vault</h3><p>Ruang lengkap untuk satu tahun bertumbuh.</p><button class="detail-link" data-detail="yearly-vault">Lihat detail</button></div><div><div class="price">Rp179.000</div><button class="add" aria-label="Tambah Yearly Growth Vault" data-product-id="yearly-vault">+</button></div></div></article>
             </div>
         </section>
-        <section class="story" id="cerita">
-            <div class="shell story-grid">
-                <div><div class="eyebrow">Cerita kami</div><h2 class="story-title">Bertumbuh tidak harus <em>terburu-buru.</em></h2></div>
-                <div class="story-copy">
-                    <p>Kita Belajar lahir dari kebiasaan sederhana: membuat ruang kecil untuk memahami diri sendiri dan menyelesaikan hal-hal yang penting. Kami percaya tools yang baik bukan yang membuat kita terus sibuk, tetapi yang membantu kita hidup dan bekerja dengan lebih sadar.</p>
-                    <p>Karena itu, setiap produk kami dirancang dengan bahasa yang jernih, langkah yang realistis, dan sedikit rasa hangat. Semuanya digital, praktis, dan bisa kamu pakai berulang kali dengan caramu sendiri.</p>
-                    <div class="story-signature">Pelan-pelan, tapi tetap bergerak.</div>
-                    <div class="story-facts"><div class="story-fact"><strong>2024</strong><span>Mulai menemani proses belajar personal.</span></div><div class="story-fact"><strong>04</strong><span>Produk kecil yang dibuat penuh perhatian.</span></div><div class="story-fact"><strong>100%</strong><span>Digital, praktis, dan bisa diakses selamanya.</span></div></div>
-                </div>
-            </div>
-        </section>
-        <section class="help" id="bantuan">
-            <div class="shell">
-                <div class="help-head"><div><div class="eyebrow">Pusat bantuan</div><h2 class="help-title">Ada yang bisa<br>kami bantu?</h2></div><p class="help-intro">Jawaban singkat untuk hal-hal yang paling sering ditanyakan sebelum dan sesudah membeli.</p></div>
-                <div class="help-grid">
-                    <div class="help-contact"><h3>Masih ingin bertanya?</h3><p>Ceritakan apa yang kamu butuhkan. Kami akan membalas melalui email dalam 1–2 hari kerja.</p><a href="mailto:hello@kitabelajar.co">hello@kitabelajar.co ↗</a></div>
-                    <div class="faq" aria-label="Pertanyaan yang sering ditanyakan">
-                        <div class="faq-item open"><button class="faq-question" type="button" aria-expanded="true">Bagaimana cara menerima produk setelah membeli?<span class="faq-icon">+</span></button><div class="faq-answer">Setelah pembayaran berhasil, link download akan dikirim ke email yang kamu masukkan saat checkout. Pastikan emailnya aktif dan tidak salah ketik.</div></div>
-                        <div class="faq-item"><button class="faq-question" type="button" aria-expanded="false">Apakah produk bisa dipakai selamanya?<span class="faq-icon">+</span></button><div class="faq-answer">Ya. Semua produk digital Kita Belajar memberikan akses selamanya. Kamu bisa menggunakannya kapan pun dan mengulang prosesnya sesuai kebutuhan.</div></div>
-                        <div class="faq-item"><button class="faq-question" type="button" aria-expanded="false">Apakah saya bisa meminta refund?<span class="faq-icon">+</span></button><div class="faq-answer">Karena produk kami berupa file digital yang langsung dikirim, pembelian umumnya tidak dapat dikembalikan. Hubungi kami jika ada masalah akses atau file yang rusak.</div></div>
-                        <div class="faq-item"><button class="faq-question" type="button" aria-expanded="false">Format file apa yang akan saya dapatkan?<span class="faq-icon">+</span></button><div class="faq-answer">Format mengikuti produk: Notion template, PDF e-book, atau Google Sheets. Detail format selalu tercantum di halaman produk sebelum checkout.</div></div>
-                    </div>
-                </div>
+        <section class="flash-sale">
+            <div class="shell flash-sale-grid">
+                <div><div class="eyebrow">Flash Sale</div><h2 class="flash-sale-title">Mulai dari yang paling <em>kamu butuhkan.</em></h2><p class="flash-sale-copy">Dapatkan pilihan tools digital dengan harga spesial untuk waktu terbatas. Akses tetap selamanya setelah pembelian.</p></div>
+                <div class="flash-sale-offer"><strong>Diskon hingga 30%</strong><span>The Gentle Bundle · Learn Better Bundle · Yearly Growth Vault</span><a class="flash-sale-link" href="promo.html">Lihat semua promo</a></div>
             </div>
         </section>
     </main>

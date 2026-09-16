@@ -1,0 +1,43 @@
+.account-modal { position: fixed; inset: 0; z-index: 30; display: grid; place-items: center; padding: 24px; background: #1c2824cc; opacity: 0; pointer-events: none; transition: opacity .25s ease; }
+.account-modal.open { opacity: 1; pointer-events: auto; }
+.account-panel { position: relative; width: min(460px, 100%); max-height: 94vh; overflow: auto; background: var(--surface, #fffefa); transform: translateY(18px); transition: transform .25s ease; }
+.account-modal.open .account-panel { transform: translateY(0); }
+.account-form { padding: 48px; }
+.account-form h2 { margin: 15px 0 10px; font-size: 35px; line-height: .98; letter-spacing: -.08em; }
+.account-copy { margin: 0 0 28px; color: var(--muted); font-size: 12px; line-height: 1.7; }
+.account-tabs { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; margin-bottom: 28px; border-bottom: 1px solid var(--line); }
+.account-tab { border: 0; border-bottom: 2px solid transparent; padding: 12px 4px; background: transparent; color: var(--muted); font-size: 12px; font-weight: 700; cursor: pointer; }
+.account-tab.active { border-bottom-color: var(--green); color: var(--green); }
+.account-field { display: block; margin-bottom: 17px; color: var(--ink); font-size: 11px; font-weight: 700; }
+.account-field input { display: block; width: 100%; margin-top: 8px; border: 1px solid var(--line); padding: 13px; outline: 0; background: transparent; color: var(--ink); font: inherit; font-size: 13px; }
+.account-field input:focus { border-color: var(--green); box-shadow: 0 0 0 2px #2f655220; }
+.account-submit { width: 100%; margin-top: 6px; border: 0; border-radius: 40px; padding: 14px; background: var(--green); color: white; font-size: 13px; font-weight: 700; cursor: pointer; }
+.forgot-password { display: block; margin: -5px 0 16px; border: 0; padding: 0; background: transparent; color: var(--green); font-size: 11px; text-decoration: underline; cursor: pointer; }
+.account-error { min-height: 16px; margin: 0 0 8px; color: #b4492c; font-size: 11px; }
+.account-note { margin: 18px 0 0; color: var(--muted); font-size: 10px; line-height: 1.6; text-align: center; }
+.account-dashboard { display: none; }
+.account-dashboard.show { display: block; }
+.dashboard-head { padding: 42px 48px 34px; background: var(--green); color: white; }
+.dashboard-head .eyebrow { color: var(--lime); }
+.dashboard-head .eyebrow::before { background: var(--lime); }
+.dashboard-head h2 { margin: 17px 0 8px; font-size: 35px; line-height: .98; letter-spacing: -.08em; }
+.dashboard-head p { margin: 0; color: #d2e1d5; font-size: 12px; }
+.dashboard-body { padding: 30px 48px 40px; }
+.dashboard-label { margin: 0 0 14px; color: var(--muted); font: 10px 'DM Mono', monospace; text-transform: uppercase; }
+.access-item { display: flex; align-items: center; justify-content: space-between; gap: 12px; border-block: 1px solid var(--line); padding: 15px 0; font-size: 13px; }
+.access-item span { color: var(--muted); font-size: 11px; }
+.logout { width: 100%; margin-top: 28px; border: 1px solid var(--green); border-radius: 40px; padding: 12px; background: transparent; color: var(--green); font-size: 12px; font-weight: 700; cursor: pointer; }
+.forgot-panel { position: fixed; inset: 0; z-index: 40; display: grid; place-items: center; padding: 24px; background: #1c2824cc; opacity: 0; pointer-events: none; transition: opacity .25s ease; }
+.forgot-panel.open { opacity: 1; pointer-events: auto; }
+.forgot-card { position: relative; width: min(430px, 100%); padding: 44px 48px; background: var(--surface, #fffefa); transform: translateY(18px); transition: transform .25s ease; }
+.forgot-panel.open .forgot-card { transform: translateY(0); }
+.forgot-card h2 { margin: 15px 0 10px; font-size: 32px; line-height: .98; letter-spacing: -.08em; }
+.forgot-copy { margin: 0 0 25px; color: var(--muted); font-size: 12px; line-height: 1.7; }
+.forgot-close { position: absolute; top: 17px; right: 17px; display: grid; place-items: center; width: 40px; height: 40px; border: 1px solid var(--line); border-radius: 50%; background: transparent; color: var(--ink); font-size: 19px; cursor: pointer; }
+.forgot-field { display: block; margin-bottom: 17px; color: var(--ink); font-size: 11px; font-weight: 700; }
+.forgot-field input { display: block; width: 100%; margin-top: 8px; border: 1px solid var(--line); padding: 13px; outline: 0; background: transparent; color: var(--ink); font: inherit; font-size: 13px; }
+.forgot-submit { width: 100%; margin-top: 6px; border: 0; border-radius: 40px; padding: 14px; background: var(--green); color: white; font-size: 13px; font-weight: 700; cursor: pointer; }
+.forgot-status { min-height: 16px; margin: 0 0 8px; font-size: 11px; }
+.forgot-status.error { color: #b4492c; }
+.forgot-status.success { color: var(--green); }
+@media (max-width: 520px) { .account-modal, .forgot-panel { padding: 12px; } .account-form { padding: 36px 24px 28px; } .dashboard-head { padding: 30px 24px; } .dashboard-body { padding: 30px 24px; } .forgot-card { padding: 36px 24px 28px; } }

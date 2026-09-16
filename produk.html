@@ -22,7 +22,7 @@
         .brand-mark { display: grid; place-items: center; width: 31px; height: 31px; border-radius: 50%; background: var(--green); color: var(--lime); font-family: var(--serif); font-size: 18px; font-style: italic; }
         .nav-links, .nav-actions { display: flex; align-items: center; gap: 24px; }
         .nav-links { color: var(--muted); font-size: 13px; font-weight: 700; }
-        .nav-links a:first-child { color: var(--ink); }
+        .nav-links a:nth-child(2) { color: var(--ink); }
         .search { display: flex; align-items: center; gap: 8px; border-bottom: 1px solid var(--line); padding: 6px 0; color: var(--muted); font-size: 12px; }
         .search input { width: 145px; border: 0; outline: 0; background: transparent; color: var(--ink); font-size: 12px; }
         .cart { display: flex; align-items: center; gap: 8px; border: 0; background: transparent; color: var(--ink); font-size: 13px; font-weight: 800; }
@@ -166,7 +166,7 @@
     </style>
 </head>
 <body>
-    <header class="topbar"><div class="shell"><nav><a class="brand" href="index.html#top"><span class="brand-mark">k</span>Kita Belajar</a><div class="nav-links"><a href="index.html#top">Beranda</a><a href="index.html#produk">Artikel</a><a href="index.html#cerita">Keunggulan</a><a href="index.html#produk">Promo</a><a href="index.html#cerita">Testimoni</a><a href="index.html#bantuan">Bantuan</a></div><div class="nav-actions"><label class="search">⌕ <input id="searchInput" type="search" placeholder="Cari produk..." aria-label="Cari produk"></label><button class="account-button" id="accountButton" type="button" aria-label="Buka akun"><span class="account-avatar" id="accountAvatar">?</span><span id="accountLabel">Masuk</span></button><button class="cart" id="openCart" type="button">Keranjang <span class="cart-count" id="cartCount">0</span></button></div></nav></div></header>
+    <header class="topbar"><div class="shell"><nav><a class="brand" href="index.html"><span class="brand-mark">k</span>Kita Belajar</a><div class="nav-links"><a href="index.html">Beranda</a><a href="produk.html">Produk</a><a href="keunggulan.html">Keunggulan</a><a href="promo.html">Promo</a><a href="testimoni.html">Testimoni</a><a href="bantuan.html">Bantuan</a></div><div class="nav-actions"><label class="search">⌕ <input id="searchInput" type="search" placeholder="Cari produk..." aria-label="Cari produk"></label><button class="account-button" id="accountButton" type="button" aria-label="Buka akun"><span class="account-avatar" id="accountAvatar">?</span><span id="accountLabel">Masuk</span></button><button class="cart" id="openCart" type="button">Keranjang <span class="cart-count" id="cartCount">0</span></button></div></nav></div></header>
     <main>
         <section class="shell catalog-head"><div><div class="eyebrow">The collection</div><h1>Tools kecil untuk <em>langkah</em> besar.</h1></div><p class="catalog-intro">Template, panduan, dan bundle digital yang bisa kamu pakai berulang kali untuk belajar, bekerja, dan bertumbuh dengan caramu sendiri.</p></section>
         <section class="shell"><div class="toolbar"><div class="filters" role="group" aria-label="Filter produk"><button class="filter active" data-filter="all">Semua produk</button><button class="filter" data-filter="template">Template</button><button class="filter" data-filter="guide">Panduan</button><button class="filter" data-filter="bundle">Bundle</button></div><span class="result-count" id="resultCount"></span></div><div class="products" id="productGrid"></div></section>
