@@ -26,5 +26,6 @@
     document.querySelector('#sharedCloseForgot').addEventListener('click', () => document.querySelector('#sharedForgotPanel').classList.remove('open'));
     document.querySelector('#sharedForgotForm').addEventListener('submit', event => { event.preventDefault(); const email = document.querySelector('#sharedForgotEmail').value.trim().toLowerCase(); const status = document.querySelector('#sharedForgotStatus'); if (!account() || account().email !== email) { status.textContent = 'Email belum terdaftar. Periksa kembali alamat emailmu.'; status.className = 'forgot-status error'; return; } status.textContent = `Kode verifikasi telah dikirim ke ${email}.`; status.className = 'forgot-status success'; });
     window.addEventListener('storage', event => { if (event.key !== 'kitaBelajarAccount') return; updateTrigger(); const saved = account(); if (saved) { formView.style.display = 'none'; dashboard.classList.add('show'); document.querySelector('#sharedDashboardName').textContent = saved.name.split(' ')[0]; } else { formView.style.display = 'block'; dashboard.classList.remove('show'); setMode('login'); } });
+    document.querySelectorAll('.access-item strong').forEach((item, index) => { item.textContent = index % 2 ? 'Paket Siap CASN' : 'Paket Lolos UTBK'; });
     updateTrigger();
 })();

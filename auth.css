@@ -1,6 +1,8 @@
 .account-modal { position: fixed; inset: 0; z-index: 30; display: grid; place-items: center; padding: 24px; background: #1c2824cc; opacity: 0; pointer-events: none; transition: opacity .25s ease; }
 .account-modal.open { opacity: 1; pointer-events: auto; }
 .account-panel { position: relative; width: min(460px, 100%); max-height: 94vh; overflow: auto; background: var(--surface, #fffefa); transform: translateY(18px); transition: transform .25s ease; }
+.nav-actions a:first-child { display: flex; align-items: center; gap: 8px; color: var(--ink); font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 700; }
+.nav-actions a:first-child::before { content: var(--account-initial, '?'); display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: var(--lime); color: var(--green); font-size: 11px; font-weight: 800; }
 .account-modal.open .account-panel { transform: translateY(0); }
 .account-form { padding: 48px; }
 .account-form h2 { margin: 15px 0 10px; font-size: 35px; line-height: .98; letter-spacing: -.08em; }
