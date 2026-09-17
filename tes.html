@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tes | Kita Belajar</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="tes.css">
+    <style>
+        :root { --ink:#1c2824; --muted:#718078; --paper:#f5f3ec; --surface:#fffefa; --line:#dce3da; --green:#2f6552; --lime:#d5ef7d; --orange:#e77745; --serif:Georgia, 'Times New Roman', serif; }
+        * { box-sizing:border-box; } body { margin:0; background:var(--paper); color:var(--ink); font-family:Manrope,sans-serif; } a { color:inherit; text-decoration:none; }
+        .shell { max-width:1240px; margin:auto; padding:0 32px; } .topbar { border-bottom:1px solid var(--line); } nav { min-height:78px; display:flex; align-items:center; justify-content:space-between; gap:24px; } .brand { display:flex; align-items:center; gap:10px; font-weight:800; font-size:19px; } .brand-mark { display:grid; place-items:center; width:31px; height:31px; border-radius:50%; background:var(--green); color:var(--lime); font:italic 18px var(--serif); } .nav-links { display:flex; gap:24px; color:var(--muted); font-size:13px; font-weight:700; } .nav-links a:last-child { color:var(--ink); } .nav-actions { display:flex; align-items:center; gap:18px; font-size:13px; font-weight:700; } .account-button { display:flex; align-items:center; gap:8px; border:0; padding:0; background:transparent; color:var(--ink); font:700 13px Manrope,sans-serif; } .account-avatar { display:grid; place-items:center; width:28px; height:28px; border-radius:50%; background:var(--lime); color:var(--green); font-size:11px; font-weight:800; }
+        .test-hero { padding:82px 0 18px; } .eyebrow { color:var(--green); font:11px 'DM Mono',monospace; letter-spacing:.08em; text-transform:uppercase; } h1 { margin:18px 0 0; font-size:clamp(48px,8vw,92px); line-height:.92; letter-spacing:-.085em; } h1 em { font-family:var(--serif); font-weight:400; } .test-intro { max-width:560px; margin:22px 0 0; color:var(--muted); font-size:14px; line-height:1.7; } .test-section { min-height:520px; padding-bottom:100px; } .test-locked { max-width:600px; padding:28px 0; border-block:1px solid var(--line); color:var(--muted); font-size:14px; line-height:1.7; } footer { border-top:1px solid var(--line); padding:24px 0 35px; color:var(--muted); font-size:11px; }
+        @media (max-width:850px) { nav { flex-wrap:wrap; padding:15px 0; } .nav-links { order:3; width:100%; overflow:auto; padding-bottom:4px; } }
+        @media (max-width:520px) { .shell { padding-inline:20px; } nav { padding:12px 0; } }
+    </style>
+</head>
+<body class="test-page">
+    <header class="topbar"><div class="shell"><nav><a class="brand" href="index.html"><span class="brand-mark">k</span>Kita Belajar</a><div class="nav-links"><a href="index.html">Beranda</a><a href="produk.html">Produk</a><a href="keunggulan.html">Keunggulan</a><a href="promo.html">Promo</a><a href="testimoni.html">Testimoni</a><a href="bantuan.html">Bantuan</a></div><div class="nav-actions"><button class="account-button" type="button" aria-label="Akun aktif"><span class="account-avatar" id="testAccountAvatar">?</span><span id="testAccountName"></span></button></div></nav></div></header>
+    <main class="shell"><section class="test-hero"><div class="eyebrow">Tes interaktif</div><h1>Kerjakan dengan <em>tenang.</em></h1><p class="test-intro">Kamu memiliki waktu 10 menit untuk menyelesaikan tes. Jawaban dapat diubah sebelum tes dikirim.</p></section><section class="test-section"><div id="testLocked" class="test-locked" hidden>Akses tes ini hanya tersedia untuk akun yang sudah membeli paket soal terkait.</div></section></main>
+    <footer class="shell"><span>© 2024 Kita Belajar. Dibuat dengan niat baik.</span><span><a href="library.html">Kembali ke Library</a></span></footer>
+    <script src="tes.js"></script><script src="library.js"></script>
+    <script>const account=JSON.parse(localStorage.getItem('kitaBelajarAccount')||'null');if(account){const name=account.name||account.email;document.querySelector('#testAccountName').textContent=name.split(' ')[0];document.querySelector('#testAccountAvatar').textContent=name.trim().charAt(0).toUpperCase();}</script>
+</body>
+</html>

@@ -7,6 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="tes.css">
     <style>
         :root {
             --ink: #1c2824;
@@ -517,6 +518,7 @@
             document.querySelector('#detailNumber').textContent = product.number;
             document.querySelector('#detailFormat').textContent = product.format;
             document.querySelector('#detailPrice').textContent = product.price;
+            document.querySelector('#detailAdd').textContent = 'Beli sekarang';
             document.querySelector('#detailDescription').textContent = product.description;
             document.querySelector('#detailIncludes').innerHTML = product.includes.map(item => `<li>${item}</li>`).join('');
             document.querySelector('#detailAudience').textContent = recommendedFor(product);
@@ -585,6 +587,12 @@
         }));
         document.querySelector('#checkoutForm').addEventListener('submit', event => {
             event.preventDefault();
+            const account = getSavedAccount();
+            if (account && selectedProduct) {
+                const purchases = JSON.parse(localStorage.getItem('kitaBelajarPurchased') || '[]');
+                if (!purchases.some(item => item.email === account.email && item.title === selectedProduct.title)) purchases.push({ email: account.email, title: selectedProduct.title, type: selectedProduct.type, format: selectedProduct.format, description: selectedProduct.description });
+                localStorage.setItem('kitaBelajarPurchased', JSON.stringify(purchases));
+            }
             paymentFormView.style.display = 'none';
             paymentSuccess.classList.add('show');
         });
@@ -708,6 +716,7 @@
                 if (!name) { accountError.textContent = 'Nama lengkap perlu diisi.'; return; }
                 const account = { name, email };
                 localStorage.setItem('kitaBelajarAccount', JSON.stringify(account));
+                window.dispatchEvent(new Event('kitaBelajarAuthChange'));
                 updateAccountButton(account);
                 showAccountDashboard(account);
                 continuePendingCheckout();
@@ -719,12 +728,14 @@
             }
             const account = { ...savedAccount, name: savedAccount.name || email.split('@')[0] };
             localStorage.setItem('kitaBelajarAccount', JSON.stringify(account));
+            window.dispatchEvent(new Event('kitaBelajarAuthChange'));
             updateAccountButton(account);
             showAccountDashboard(account);
             continuePendingCheckout();
         });
         document.querySelector('#logoutButton').addEventListener('click', () => {
             localStorage.removeItem('kitaBelajarAccount');
+            window.dispatchEvent(new Event('kitaBelajarAuthChange'));
             updateAccountButton(null);
             closeAccount();
         });
@@ -735,5 +746,6 @@
         updateAccountButton(getSavedAccount());
         renderCart();
     </script>
+    <script src="library.js"></script>
 </body>
 </html>
