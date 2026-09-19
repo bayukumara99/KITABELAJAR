@@ -20,6 +20,15 @@
                 nav.appendChild(link);
             }
             link.hidden = !account;
+            let teacherLink = nav.querySelector('.teacher-nav-link');
+            if (!teacherLink) {
+                teacherLink = document.createElement('a');
+                teacherLink.className = 'teacher-nav-link';
+                teacherLink.href = 'teacher.html';
+                teacherLink.textContent = 'Panel Guru';
+                nav.appendChild(teacherLink);
+            }
+            teacherLink.hidden = account?.role !== 'teacher';
         });
     };
     refreshLibraryLinks();

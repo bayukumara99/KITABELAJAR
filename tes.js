@@ -31,6 +31,8 @@
     };
 
     const quizState = { questions: [], current: 0, answers: [], seconds: 600, timer: null, product: null };
+    const readQuestionOverrides = () => { try { return JSON.parse(localStorage.getItem('kitaBelajarQuestionOverrides') || '{}'); } catch (error) { return {}; } };
+    const getQuestions = product => { const target = getTarget(product); const overrides = readQuestionOverrides(); const productQuestions = product.productId && Array.isArray(overrides[product.productId]) ? overrides[product.productId] : []; return quizQuestions[target].map((question, index) => productQuestions[index] || overrides[`${target}-${index}`] || question); };
     const getTarget = product => {
         const text = `${product.title || ''} ${product.type || ''}`.toLowerCase();
         if (text.includes('utbk')) return 'utbk';
@@ -70,7 +72,7 @@
     const startQuiz = product => {
         ensureModal();
         quizState.product = product;
-        quizState.questions = quizQuestions[getTarget(product)];
+        quizState.questions = getQuestions(product);
         quizState.current = 0;
         quizState.answers = [];
         quizState.seconds = 600;

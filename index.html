@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="tes.css">
+    <link rel="stylesheet" href="auth.css">
     <style>
         :root {
             --ink: #1c2824;
@@ -345,11 +346,12 @@
                 <h2 id="accountTitle">Selamat datang kembali.</h2>
                 <p class="account-copy" id="accountCopy">Masuk untuk menyimpan produk dan melihat akses belajarmu dalam satu tempat.</p>
                 <div class="account-tabs"><button class="account-tab active" type="button" data-auth-mode="login">Masuk</button><button class="account-tab" type="button" data-auth-mode="signup">Buat akun</button></div>
+                <div class="role-switch" role="group" aria-label="Pilih jenis akun"><button class="role-option active" type="button" data-account-role="student"><strong>Murid / Siswa</strong><span>Belajar dan latihan</span></button><button class="role-option" type="button" data-account-role="teacher"><strong>Guru</strong><span>Mengelola pembelajaran</span></button></div>
                 <form id="accountForm"><label class="account-field" id="nameField" hidden>Nama lengkap<input id="accountName" type="text" autocomplete="name" placeholder="Nama kamu"></label><label class="account-field">Email<input id="accountEmail" type="email" autocomplete="email" placeholder="nama@email.com" required></label><label class="account-field">Password<input id="accountPassword" type="password" autocomplete="current-password" minlength="6" placeholder="Minimal 6 karakter" required></label><button class="forgot-password" id="forgotPassword" type="button">Lupa password?</button><p class="account-error" id="accountError" role="alert"></p><p class="account-success" id="accountSuccess" role="status"></p><button class="primary account-submit" id="accountSubmit" type="submit">Masuk ke akun</button></form>
                 <p class="account-note">Demo frontend: data akun disimpan lokal di perangkat ini.</p>
             </div>
             <div class="account-dashboard" id="accountDashboard">
-                <div class="dashboard-head"><div class="eyebrow">Personal dashboard</div><h2>Halo, <span id="dashboardName"></span>.</h2><p>Ruang kecil untuk melanjutkan proses belajarmu.</p></div>
+                <div class="dashboard-head"><div class="eyebrow">Personal dashboard</div><div class="dashboard-role" id="dashboardRole"></div><h2>Halo, <span id="dashboardName"></span>.</h2><p id="dashboardCopy">Ruang kecil untuk melanjutkan proses belajarmu.</p></div>
                 <div class="dashboard-body"><p class="dashboard-label">Akses kamu</p><div class="access-item"><strong>Weekly Reset Planner</strong><span>Siap dipakai</span></div><div class="access-item"><strong>Focus Without Force</strong><span>Siap dipakai</span></div><button class="logout" id="logoutButton" type="button">Keluar dari akun</button></div>
             </div>
         </div>
@@ -372,6 +374,7 @@
         const cartModal = document.querySelector('#cartModal');
         const cartItemsElement = document.querySelector('#cartItems');
         let authMode = 'login';
+        let accountRole = 'student';
         let selectedProduct = null;
         let pendingCheckout = null;
         let cartItems = {};
@@ -621,6 +624,8 @@
             accountFormView.style.display = 'none';
             accountDashboard.classList.add('show');
             document.querySelector('#dashboardName').textContent = account.name.split(' ')[0];
+            document.querySelector('#dashboardRole').textContent = account.role === 'teacher' ? 'Dashboard guru' : 'Dashboard murid';
+            document.querySelector('#dashboardCopy').textContent = account.role === 'teacher' ? 'Ruang untuk mengelola pembelajaran dan memantau kelasmu.' : 'Ruang kecil untuk melanjutkan proses belajarmu.';
         }
 
         function openAccount() {
@@ -634,6 +639,7 @@
                 accountFormView.style.display = 'block';
                 accountDashboard.classList.remove('show');
                 setAuthMode('login');
+                setAccountRole('student');
                 document.querySelector('#accountEmail').focus();
             }
         }
@@ -675,6 +681,11 @@
             document.querySelector('#accountSuccess').textContent = '';
         }
 
+        function setAccountRole(role) {
+            accountRole = role;
+            document.querySelectorAll('[data-account-role]').forEach(option => option.classList.toggle('active', option.dataset.accountRole === role));
+        }
+
         document.querySelector('#forgotPassword').addEventListener('click', () => {
             document.querySelector('#forgotEmail').value = document.querySelector('#accountEmail').value.trim().toLowerCase();
             document.querySelector('#forgotStatus').textContent = '';
@@ -706,6 +717,7 @@
             if (event.target === accountModal) closeAccount();
         });
         document.querySelectorAll('.account-tab').forEach(tab => tab.addEventListener('click', () => setAuthMode(tab.dataset.authMode)));
+        document.querySelectorAll('[data-account-role]').forEach(option => option.addEventListener('click', () => setAccountRole(option.dataset.accountRole)));
         accountForm.addEventListener('submit', event => {
             event.preventDefault();
             const email = document.querySelector('#accountEmail').value.trim().toLowerCase();
@@ -714,7 +726,7 @@
             const savedAccount = getSavedAccount();
             if (authMode === 'signup') {
                 if (!name) { accountError.textContent = 'Nama lengkap perlu diisi.'; return; }
-                const account = { name, email };
+                const account = { name, email, role: accountRole };
                 localStorage.setItem('kitaBelajarAccount', JSON.stringify(account));
                 window.dispatchEvent(new Event('kitaBelajarAuthChange'));
                 updateAccountButton(account);
@@ -722,11 +734,11 @@
                 continuePendingCheckout();
                 return;
             }
-            if (!savedAccount || savedAccount.email !== email) {
-                accountError.textContent = 'Akun belum ditemukan. Pilih “Buat akun” terlebih dahulu.';
+            if (!savedAccount || savedAccount.email !== email || (savedAccount.role || 'student') !== accountRole) {
+                accountError.textContent = 'Email atau jenis akun tidak sesuai.';
                 return;
             }
-            const account = { ...savedAccount, name: savedAccount.name || email.split('@')[0] };
+            const account = { ...savedAccount, name: savedAccount.name || email.split('@')[0], role: savedAccount.role || 'student' };
             localStorage.setItem('kitaBelajarAccount', JSON.stringify(account));
             window.dispatchEvent(new Event('kitaBelajarAuthChange'));
             updateAccountButton(account);

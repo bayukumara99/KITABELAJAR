@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Guru | Kita Belajar</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="auth.css">
+    <style>
+        :root { --ink:#1c2824; --muted:#718078; --paper:#f5f3ec; --surface:#fffefa; --line:#dce3da; --green:#2f6552; --lime:#d5ef7d; --serif:Georgia, 'Times New Roman', serif; }
+        * { box-sizing: border-box; }
+        body { margin: 0; background: var(--paper); color: var(--ink); font-family: 'Manrope', sans-serif; }
+        a { color: inherit; text-decoration: none; }
+        .shell { max-width: 1100px; margin: 0 auto; padding: 0 32px; }
+        .topbar { border-bottom: 1px solid var(--line); }
+        nav { min-height: 78px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+        .brand { display: flex; align-items: center; gap: 10px; font-size: 19px; font-weight: 800; letter-spacing: -.05em; }
+        .brand-mark { display: grid; place-items: center; width: 31px; height: 31px; border-radius: 50%; background: var(--green); color: var(--lime); font: italic 18px var(--serif); }
+        .nav-links { display: flex; gap: 24px; color: var(--muted); font-size: 13px; font-weight: 700; }
+        .nav-links a:last-child { color: var(--ink); }
+        .teacher-account { color: var(--green); font-size: 12px; font-weight: 800; }
+        .teacher-main { padding: 78px 0 100px; }
+        .teacher-heading { display: flex; align-items: end; justify-content: space-between; gap: 35px; border-bottom: 1px solid var(--line); padding-bottom: 38px; }
+        .eyebrow { color: var(--green); font: 11px 'DM Mono', monospace; letter-spacing: .08em; text-transform: uppercase; }
+        h1 { max-width: 650px; margin: 17px 0 0; font-size: clamp(48px, 7vw, 82px); line-height: .94; letter-spacing: -.085em; }
+        h1 em { font-family: var(--serif); font-weight: 400; }
+        .teacher-intro { max-width: 300px; margin: 0; color: var(--muted); font-size: 13px; line-height: 1.75; }
+        .teacher-workspace { padding-top: 34px; }
+        .teacher-page-tools { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 15px; }
+        .teacher-page-card { border: 1px solid var(--line); padding: 25px; background: var(--surface); }
+        .teacher-page-card h2 { margin: 12px 0 8px; font-size: 23px; letter-spacing: -.06em; }
+        .teacher-page-card p { min-height: 42px; margin: 0 0 20px; color: var(--muted); font-size: 12px; line-height: 1.7; }
+        .teacher-page-card button { border: 0; border-radius: 28px; padding: 12px 17px; background: var(--green); color: white; font-size: 12px; font-weight: 700; cursor: pointer; }
+        .teacher-page-card button:hover { background: #214b3c; }
+        .teacher-denied { max-width: 620px; border-block: 1px solid var(--line); padding: 28px 0; color: var(--muted); font-size: 14px; line-height: 1.75; }
+        footer { border-top: 1px solid var(--line); padding: 24px 0 35px; color: var(--muted); font-size: 11px; }
+        @media (max-width: 700px) { .shell { padding-inline: 20px; } nav { flex-wrap: wrap; padding: 15px 0; } .nav-links { order: 3; width: 100%; overflow-x: auto; padding-bottom: 4px; } .teacher-heading { align-items: start; flex-direction: column; } .teacher-page-tools { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body class="teacher-page">
+    <header class="topbar"><div class="shell"><nav><a class="brand" href="index.html"><span class="brand-mark">k</span>Kita Belajar</a><div class="nav-links"><a href="index.html">Beranda</a><a href="produk.html">Produk</a><a href="library.html">Library</a><a class="teacher-nav-link" href="teacher.html" hidden>Panel Guru</a></div><span class="teacher-account">Panel guru</span></nav></div></header>
+    <main class="shell teacher-main">
+        <section class="teacher-heading"><div><div class="eyebrow">Teacher workspace</div><h1>Kelola ruang <em>belajarmu.</em></h1></div><p class="teacher-intro">Perbarui informasi produk dan soal latihan yang akan digunakan siswa.</p></section>
+        <section id="teacherWorkspace" class="teacher-workspace"><div id="teacherPageTools" class="teacher-page-tools"><article class="teacher-page-card"><div class="eyebrow">Catalog</div><h2>Edit produk</h2><p>Ubah nama, deskripsi, dan harga produk yang tampil di katalog.</p><button id="openProductEditor" type="button">Buka editor produk</button></article><article class="teacher-page-card"><div class="eyebrow">Question bank</div><h2>Edit soal</h2><p>Ubah pertanyaan, pilihan jawaban, dan kunci jawaban untuk setiap target.</p><button id="openQuestionEditor" type="button">Buka editor soal</button></article></div></section>
+        <p id="teacherAccessDenied" class="teacher-denied" hidden>Akses halaman ini hanya tersedia untuk akun yang masuk sebagai guru. Silakan kembali ke halaman utama dan masuk dengan akun guru.</p>
+    </main>
+    <footer><div class="shell"><span>© 2024 Kita Belajar. Panel pengelolaan guru.</span></div></footer>
+    <script src="teacher-admin.js"></script>
+</body>
+</html>
